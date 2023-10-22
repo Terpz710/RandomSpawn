@@ -1,0 +1,6 @@
+name: RandomSpawn
+version: 1.0.0
+author: Terpz710
+main: Terpz710\RandomSpawn\Main
+api: 5.0.0
+description: When a player spawns in for the first time it will random tp them.
