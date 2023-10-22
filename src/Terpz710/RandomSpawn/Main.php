@@ -22,7 +22,7 @@ class Main extends PluginBase{
 
     public function onPlayerJoin(PlayerJoinEvent $event): void{
         $player = $event->getPlayer();
-        if (!$player->getSpawn()) {
+        if ($player->getSpawn() === null) {
             $spawnLocation = $this->getRandomSpawnLocation($player);
             $player->teleport($spawnLocation);
         }
@@ -30,7 +30,7 @@ class Main extends PluginBase{
 
     public function onPlayerRespawn(PlayerRespawnEvent $event): void{
         $player = $event->getPlayer();
-        if (!$player->getSpawn()) {
+        if ($player->getSpawn() === null) {
             $spawnLocation = $this->getRandomSpawnLocation($player);
             $event->setRespawnPosition($spawnLocation);
         }
@@ -38,7 +38,7 @@ class Main extends PluginBase{
 
     public function onPlayerDeath(PlayerDeathEvent $event): void{
         $player = $event->getPlayer();
-        if (!$player->getSpawn()) {
+        if ($player->getSpawn() === null) {
             $spawnLocation = $this->getRandomSpawnLocation($player);
             $player->teleport($spawnLocation);
         }
