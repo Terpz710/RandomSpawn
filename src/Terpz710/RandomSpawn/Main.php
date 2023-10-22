@@ -8,7 +8,6 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
 use pocketmine\event\player\PlayerDeathEvent;
-use pocketmine\world\World;
 use pocketmine\math\Vector3;
 use pocketmine\utils\Config;
 
@@ -22,26 +21,20 @@ class Main extends PluginBase{
 
     public function onPlayerJoin(PlayerJoinEvent $event): void{
         $player = $event->getPlayer();
-        if ($player->getSpawn() === null) {
-            $spawnLocation = $this->getRandomSpawnLocation($player);
-            $player->teleport($spawnLocation);
-        }
+        $spawnLocation = $this->getRandomSpawnLocation($player);
+        $player->teleport($spawnLocation);
     }
 
     public function onPlayerRespawn(PlayerRespawnEvent $event): void{
         $player = $event->getPlayer();
-        if ($player->getSpawn() === null) {
-            $spawnLocation = $this->getRandomSpawnLocation($player);
-            $event->setRespawnPosition($spawnLocation);
-        }
+        $spawnLocation = $this->getRandomSpawnLocation($player);
+        $event->setRespawnPosition($spawnLocation);
     }
 
     public function onPlayerDeath(PlayerDeathEvent $event): void{
         $player = $event->getPlayer();
-        if ($player->getSpawn() === null) {
-            $spawnLocation = $this->getRandomSpawnLocation($player);
-            $player->teleport($spawnLocation);
-        }
+        $spawnLocation = $this->getRandomSpawnLocation($player);
+        $player->teleport($spawnLocation);
     }
 
     public function getRandomSpawnLocation($player): Vector3{
