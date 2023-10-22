@@ -22,7 +22,7 @@ class Main extends PluginBase{
 
     public function onPlayerJoin(PlayerJoinEvent $event): void{
         $player = $event->getPlayer();
-        if (!$player->spawnFromSleep()) {
+        if (!$player->getSpawn()) {
             $spawnLocation = $this->getRandomSpawnLocation($player);
             $player->teleport($spawnLocation);
         }
@@ -30,7 +30,7 @@ class Main extends PluginBase{
 
     public function onPlayerRespawn(PlayerRespawnEvent $event): void{
         $player = $event->getPlayer();
-        if (!$player->spawnFromSleep()) {
+        if (!$player->getSpawn()) {
             $spawnLocation = $this->getRandomSpawnLocation($player);
             $event->setRespawnPosition($spawnLocation);
         }
@@ -38,7 +38,7 @@ class Main extends PluginBase{
 
     public function onPlayerDeath(PlayerDeathEvent $event): void{
         $player = $event->getPlayer();
-        if (!$player->spawnFromSleep()) {
+        if (!$player->getSpawn()) {
             $spawnLocation = $this->getRandomSpawnLocation($player);
             $player->teleport($spawnLocation);
         }
@@ -51,7 +51,7 @@ class Main extends PluginBase{
         
         $x = rand(0, $maxX);
         $z = rand(0, $maxZ);
-        $world = $player->getDefaultWorld();
+        $world = $player->getLevel();
         
         $y = $world->getHighestBlockAt($x, $z);
         
