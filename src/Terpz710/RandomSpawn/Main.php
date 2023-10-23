@@ -13,6 +13,7 @@ use pocketmine\event\player\PlayerRespawnEvent;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\math\Vector3;
 use pocketmine\utils\Config;
+use pocketmine\level\Level;
 
 class Main extends PluginBase implements Listener {
 
@@ -47,10 +48,12 @@ class Main extends PluginBase implements Listener {
         
         $x = rand(0, $maxX);
         $z = rand(0, $maxZ);
-        $world = $this->getServer()->getDefaultWorld();
-    
+        
+        $worldManager = $this->getServer()->getWorldManager();
+        $world = $worldManager->getDefaultWorld();
+        
         $y = $world->getHighestBlockAt($x, $z);
-    
+        
         return new Position($x, $y, $z, $world);
     }
 }
