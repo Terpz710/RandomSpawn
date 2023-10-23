@@ -40,17 +40,17 @@ class Main extends PluginBase implements Listener {
         $player->teleport($spawnLocation);
     }
 
-    public function getRandomSpawnLocation($player): Position {
+    public function getRandomSpawnLocation(Player $player): Position {
         $config = $this->getConfig();
         $maxX = $config->get("spawn_range")["max_x"];
         $maxZ = $config->get("spawn_range")["max_z"];
         
         $x = rand(0, $maxX);
         $z = rand(0, $maxZ);
-        $world = $player->getWorld();
-        
+        $world = $this->getServer()->getDefaultWorld();
+    
         $y = $world->getHighestBlockAt($x, $z);
-        
+    
         return new Position($x, $y, $z, $world);
     }
 }
