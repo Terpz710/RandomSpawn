@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Terpz710\RandomSpawn;
 
 use pocketmine\plugin\PluginBase;
+use pocketmine\player\Player;
+use pocketmine\world\World;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
