@@ -12,7 +12,7 @@ use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\math\Vector3;
 use pocketmine\utils\Config;
 
-class Main extends PluginBase{
+class Main extends PluginBase implements Listener {
 
     public function onEnable(): void {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -20,25 +20,25 @@ class Main extends PluginBase{
         $this->reloadConfig();
     }
 
-    public function onPlayerJoin(PlayerJoinEvent $event): void{
+    public function onPlayerJoin(PlayerJoinEvent $event): void {
         $player = $event->getPlayer();
         $spawnLocation = $this->getRandomSpawnLocation($player);
         $player->teleport($spawnLocation);
     }
 
-    public function onPlayerRespawn(PlayerRespawnEvent $event): void{
+    public function onPlayerRespawn(PlayerRespawnEvent $event): void {
         $player = $event->getPlayer();
         $spawnLocation = $this->getRandomSpawnLocation($player);
         $event->setRespawnPosition($spawnLocation);
     }
 
-    public function onPlayerDeath(PlayerDeathEvent $event): void{
+    public function onPlayerDeath(PlayerDeathEvent $event): void {
         $player = $event->getPlayer();
         $spawnLocation = $this->getRandomSpawnLocation($player);
         $player->teleport($spawnLocation);
     }
 
-    public function getRandomSpawnLocation($player): Vector3{
+    public function getRandomSpawnLocation($player): Vector3 {
         $config = $this->getConfig();
         $maxX = $config->get("spawn_range")["max_x"];
         $maxZ = $config->get("spawn_range")["max_z"];
