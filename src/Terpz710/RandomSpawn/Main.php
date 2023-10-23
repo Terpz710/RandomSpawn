@@ -25,6 +25,7 @@ class Main extends PluginBase implements Listener {
 
     public function onPlayerJoin(PlayerJoinEvent $event): void {
         $player = $event->getPlayer();
+
         if (!$this->hasJoinedBefore($player)) {
             $spawnLocation = $this->getRandomSpawnLocation($player);
             $player->teleport($spawnLocation);
@@ -32,8 +33,18 @@ class Main extends PluginBase implements Listener {
         }
     }
 
+    public function onPlayerRespawn(PlayerRespawnEvent $event): void {
+        $player = $event->getPlayer();
+
+        if (!$player->hasSpawnedAtBed()) {
+            $spawnLocation = $this->getRandomSpawnLocation($player);
+            $event->setRespawnPosition($spawnLocation);
+        }
+    }
+
     private function hasJoinedBefore(Player $player): bool {
         $playerDataFile = $this->getDataFolder() . "joined_players.json";
+
         if (!file_exists($playerDataFile)) {
             return false;
         }
@@ -48,6 +59,7 @@ class Main extends PluginBase implements Listener {
         $playerDataFile = $this->getDataFolder() . "joined_players.json";
         $playerUniqueId = $player->getUniqueId()->toString();
         $joinedPlayersData = [];
+
         if (file_exists($playerDataFile)) {
             $joinedPlayersData = json_decode(file_get_contents($playerDataFile), true);
         }
