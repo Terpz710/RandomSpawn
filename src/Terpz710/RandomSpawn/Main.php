@@ -6,7 +6,7 @@ namespace Terpz710\RandomSpawn;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\player\Player;
-use pocketmine\world\World;
+use pocketmine\world\Position;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
@@ -40,7 +40,7 @@ class Main extends PluginBase implements Listener {
         $player->teleport($spawnLocation);
     }
 
-    public function getRandomSpawnLocation($player): Vector3 {
+    public function getRandomSpawnLocation($player): Position {
         $config = $this->getConfig();
         $maxX = $config->get("spawn_range")["max_x"];
         $maxZ = $config->get("spawn_range")["max_z"];
@@ -51,6 +51,6 @@ class Main extends PluginBase implements Listener {
         
         $y = $world->getHighestBlockAt($x, $z);
         
-        return new Vector3($x, $y, $z);
+        return new Position($x, $y, $z, $world);
     }
 }
