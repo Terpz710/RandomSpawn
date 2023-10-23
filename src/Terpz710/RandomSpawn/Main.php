@@ -47,7 +47,7 @@ class Main extends PluginBase implements Listener {
         
         $x = rand(0, $maxX);
         $z = rand(0, $maxZ);
-        $world = $player->getDefaultWorld();
+        $world = $player->getWorld();
         
         $y = $world->getHighestBlockAt($x, $z);
         
